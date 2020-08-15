@@ -59,6 +59,8 @@ dependencies {
     implementation("org.apache.httpcomponents:httpcore:4.4.10")
     implementation("org.slf4j:slf4j-api:1.7.21")
 
+    compile("org.springframework:spring-expression:5.2.8.RELEASE")
+
     compileOnly("org.clojure:clojure:1.10.0")
 
     testImplementation("org.clojure:clojure:1.10.0")
