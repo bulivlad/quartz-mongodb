@@ -115,6 +115,16 @@ publishing {
             from components.java
         }
     }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/bulivlad/quartz-mongodb")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_PACKAGE_USER")
+                password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_PACKAGE_TOKEN")
+            }
+        }
+    }
 }
 
 mongo {
@@ -144,22 +154,3 @@ tasks.withType(Test){
     }
 }
 
-bintray {
-    user = System.getenv("BINTRAY_USERNAME")
-    key  = System.getenv("BINTRAY_API_KEY")
-    publications = ['quartzMongoDB']
-    pkg {
-        repo = 'maven'
-        name = 'quartz-mongodb'
-        labels = ['quartz', 'mongodb']
-        userOrg = 'michaelklishin'
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/michaelklishin/quartz-mongodb.git'
-
-        version {
-            name = projectVersion
-            desc = 'MongoDB-backed job store for the Quartz scheduler'
-			vcsTag = projectVersion
-        }
-    }
-}
